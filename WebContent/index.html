@@ -3,12 +3,13 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
+<script type="text/javascript" src = 'js/xhrPromise.js'></script>
 </head>
 <button onclick='send()'>Click</button>
 <body>
 <script>
 	var xhr = new XMLHttpRequest();
-	
+	var wrapperXhr = new XHR();
 	xhr.onload = () => {
         if (xhr.status >= 200 && xhr.status < 300) {
             console.log(JSON.parse(xhr.responseText));
@@ -20,7 +21,8 @@
     function send(){
     	xhr.open('GET','./Communicate?a=5',true);
         xhr.send();	
-        
+        wrapperXhr.get('./Communicate',{a:5},{ 'my-first-header': 'blub',
+                                                 'my-second-header': 'peng'}); 
     }
 </script>
 </body>

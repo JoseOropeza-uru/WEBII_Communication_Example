@@ -3,11 +3,13 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
-<script type="text/javascript" src = 'js/xhrPromise.js'></script>
+<script type="text/javascript" src='js/xhrPromise.js'></script>
 </head>
 <button onclick='send()'>Click</button>
+<button onclick="sendFetch()">GetFetch</button>
+<button onclick="postFetch()">PostFetch</button>
 <body>
-<script>
+	<script>
 	var xhr = new XMLHttpRequest();
 	var wrapperXhr = new XHR();
 	xhr.onload = () => {
@@ -24,6 +26,32 @@
         wrapperXhr.get('./Communicate',{a:5},{ 'my-first-header': 'blub',
                                                  'my-second-header': 'peng'}); 
     }
+    
+    function sendFetch(){
+    	
+    	fetch('./Communicate?a=5')
+    	.then((resp)=>
+    		{console.log(resp)
+    		return resp.json();
+    		}).then((data)=>{
+    		console.log(data);
+    	});
+    }
+	function postFetch(){
+   		let body = {name:'Jose',age:22};
+   		let config = {method: 'POST', 
+   	    	    body:JSON.stringify(body) 
+	    };
+    	fetch('./Communicate?a=5',config)
+    	.then((resp)=>
+    		{console.log(resp)
+    		return resp.json();
+    		}).then((data)=>{
+    		console.log(data);
+    	});
+    }
+    
+    
 </script>
 </body>
 </html>

@@ -4,8 +4,4 @@
 
 <web-app>
   <display-name>Archetype Created Web Application</display-name>
-    <servlet>
-        <servlet-name>Communicate</servlet-name>
-        <servlet-class>servlets.Communicate</servlet-class>
-    </servlet>
 </web-app>

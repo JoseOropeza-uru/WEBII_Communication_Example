@@ -1,57 +1,57 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="ISO-8859-1">
-<title>Insert title here</title>
-<script type="text/javascript" src='js/xhrPromise.js'></script>
+    <meta charset="ISO-8859-1">
+    <title>Insert title here</title>
+    <script type="text/javascript" src='js/xhrPromise.js'></script>
 </head>
 <button onclick='send()'>Click</button>
 <button onclick="sendFetch()">GetFetch</button>
 <button onclick="postFetch()">PostFetch</button>
 <body>
-	<script>
-	var xhr = new XMLHttpRequest();
-	var wrapperXhr = new XHR();
-	xhr.onload = () => {
+<script type="application/javascript">
+    var xhr = new XMLHttpRequest();
+    var wrapperXhr = new XHR();
+    xhr.onload = () => {
         if (xhr.status >= 200 && xhr.status < 300) {
             console.log(JSON.parse(xhr.responseText));
         } else {
-           console.error('error');
+            console.error('error');
         }
     };
-    
-    function send(){
-    	xhr.open('GET','./Communicate?a=5',true);
-        xhr.send();	
-        wrapperXhr.get('./Communicate',{a:5},{ 'my-first-header': 'blub',
-                                                 'my-second-header': 'peng'}); 
+    function send() {
+        xhr.open('GET', './Communicate?a=5', true);
+        xhr.send();
+        wrapperXhr.get('./Communicate', {a: 5}, {
+            'my-first-header': 'blub',
+            'my-second-header': 'peng'
+        });
     }
-    
-    function sendFetch(){
-    	
-    	fetch('./Communicate?a=5')
-    	.then((resp)=>
-    		{console.log(resp)
-    		return resp.json();
-    		}).then((data)=>{
-    		console.log(data);
-    	});
+    function sendFetch() {
+        fetch('./Communicate?a=5')
+            .then((resp) => {
+                console.log(resp)
+                return resp.json();
+            }).then((data) => {
+            console.log(data);
+        });
     }
-	function postFetch(){
-   		let body = {name:'Jose',age:22};
-   		let config = {method: 'POST', 
-   	    	    body:JSON.stringify(body) 
-	    };
-    	fetch('./Communicate?a=5',config)
-    	.then((resp)=>
-    		{console.log(resp)
-    		return resp.json();
-    		}).then((data)=>{
-    		console.log(data);
-    	});
+
+    function postFetch() {
+        let body = {name: 'Jose', age: 22};
+        let config = {
+            method: 'POST',
+            body: JSON.stringify(body)
+        };
+        fetch('./Communicate?a=5', config)
+            .then((resp) => {
+                console.log(resp)
+                return resp.json();
+            }).then((data) => {
+            console.log(data);
+        })
+        ;
     }
-    
-    
 </script>
 </body>
 </html>

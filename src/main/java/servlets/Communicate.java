@@ -11,12 +11,11 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.stream.Collectors;
 
-@WebServlet("/Communicate")
+@WebServlet(urlPatterns = "/Communicate",name = "Communicate")
 public class Communicate extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         PrintWriter out = response.getWriter();
         JSONObject json = new JSONObject(request.getReader().lines().collect(Collectors.joining()));
-
         json.put("status", 200).put("res", "OK/POST").put("param", request.getParameter("a"));
         out.println(json.toString());
     }
